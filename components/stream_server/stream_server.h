@@ -1,5 +1,6 @@
 #pragma once
 
+#include "esphome/core/gpio.h"
 #include "esphome/core/component.h"
 #include "esphome/components/socket/socket.h"
 #include "esphome/components/uart/uart.h"
@@ -15,7 +16,8 @@
 #include <string>
 #include <vector>
 
-class StreamServerComponent : public esphome::Component {
+class StreamServerComponent : public esphome::Component
+{
 public:
     StreamServerComponent() = default;
     explicit StreamServerComponent(esphome::uart::UARTComponent *stream) : stream_{stream} {}
@@ -53,7 +55,8 @@ protected:
     /// Return the number of consecutive elements that are ahead of @p pos in memory.
     size_t buf_ahead(size_t pos) { return (pos | (this->buf_size_ - 1)) - pos + 1; }
 
-    struct Client {
+    struct Client
+    {
         Client(std::unique_ptr<esphome::socket::Socket> socket, std::string identifier, size_t position);
 
         std::unique_ptr<esphome::socket::Socket> socket{nullptr};
