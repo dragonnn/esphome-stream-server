@@ -17,6 +17,9 @@
 #include <string>
 #include <vector>
 
+namespace esphome {
+namespace stream_server {
+
 class StreamServerComponent : public esphome::Component
 {
 public:
@@ -84,3 +87,6 @@ protected:
     std::unique_ptr<esphome::socket::Socket> socket_{};
     std::vector<Client> clients_{};
 };
+
+}
+}

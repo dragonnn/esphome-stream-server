@@ -9,6 +9,9 @@
 #include "esphome/components/network/util.h"
 #include "esphome/components/socket/socket.h"
 
+namespace esphome {
+namespace stream_server {
+
 static const char *TAG = "stream_server";
 
 using namespace esphome;
@@ -207,3 +210,6 @@ StreamServerComponent::Client::Client(
     std::unique_ptr<esphome::socket::Socket> socket, std::string identifier,
     size_t position)
     : socket(std::move(socket)), identifier{identifier}, position{position} {}
+
+}
+}
