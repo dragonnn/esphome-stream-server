@@ -1,10 +1,10 @@
 #pragma once
 
-
+#include "esphome/core/gpio.h"
 #include "esphome/core/component.h"
+#include "esphome/core/hal.h"
 #include "esphome/components/socket/socket.h"
 #include "esphome/components/uart/uart.h"
-#include "esphome/core/gpio.h"
 
 #ifdef USE_BINARY_SENSOR
 #include "esphome/components/binary_sensor/binary_sensor.h"
@@ -17,7 +17,7 @@
 #include <string>
 #include <vector>
 
-class StreamServerComponent : public uart::UARTDevice, public esphome::Component
+class StreamServerComponent : public esphome::Component
 {
 public:
     StreamServerComponent() = default;
