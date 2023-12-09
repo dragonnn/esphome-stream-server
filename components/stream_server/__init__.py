@@ -13,8 +13,8 @@ DEPENDENCIES = ["uart", "network"]
 
 MULTI_CONF = True
 
-ns = cg.global_ns
-StreamServerComponent = ns.class_("StreamServerComponent", cg.Component)
+stream_server_ns = cg.esphome_ns.namespace('stream_server')
+StreamServerComponent = stream_server_ns.class_("StreamServerComponent", cg.Component)
 
 
 def validate_buffer_size(buffer_size):
