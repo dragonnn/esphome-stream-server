@@ -17,7 +17,7 @@
 #include <string>
 #include <vector>
 
-class StreamServerComponent : public esphome::Component
+class StreamServerComponent :: public uart::UARTDevice, public esphome::Component
 {
 public:
     StreamServerComponent() = default;
