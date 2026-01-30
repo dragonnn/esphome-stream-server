@@ -93,11 +93,19 @@ void StreamServerComponent::accept() {
   if (!socket)
     return;
 
-  socket->setblocking(false);
-  std::string identifier = socket->getpeername();
-  this->clients_.emplace_back(std::move(socket), identifier, this->buf_head_);
-  ESP_LOGD(TAG, "New client connected from %s", identifier.c_str());
-  this->publish_sensor();
+    socket->setblocking(false);
+
+#if ESPHOME_VERSION_CODE >= VERSION_CODE(2026, 1, 0)
+    std::string identifier = std::string{esphome::socket::SOCKADDR_STR_LEN, 0};
+    auto identifier_span = std::span<char, esphome::socket::SOCKADDR_STR_LEN>(identifier.data(), identifier.size());
+    identifier.resize(socket->getpeername_to(identifier_span));
+#else
+    std::string identifier = socket->getpeername();
+#endif
+
+    this->clients_.emplace_back(std::move(socket), identifier, this->buf_head_);
+    ESP_LOGD(TAG, "New client connected from %s", identifier.c_str());
+    this->publish_sensor();
 }
 
 void StreamServerComponent::cleanup() {
